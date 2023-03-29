@@ -6,14 +6,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class LivesText extends TextEntity {
-    public LivesText(Coordinate2D initialLocation) {
+public class BulletText extends TextEntity{
+    public BulletText(Coordinate2D initialLocation) {
         super(initialLocation);
         setFont(Font.font("Roboto", FontWeight.NORMAL, 30));
-        setFill(Color.RED);
+        setFill(Color.YELLOW);
     }
 
-    public void setLivesText(int health){
-        setText("Lives: " + health);
+    public void setBulletsText(int bullets){
+        setText("Bullets: " + bullets);
     }
 }
+

@@ -12,18 +12,20 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class StartButton extends TextEntity implements MouseButtonPressedListener, MouseEnterListener, MouseExitListener {
+public class SceneButton extends TextEntity implements MouseButtonPressedListener, MouseEnterListener, MouseExitListener {
     private Shooter shooter;
-    public StartButton(Coordinate2D initialLocation, Shooter shooter){
-        super(initialLocation,"Play game");
+    int id;
+    public SceneButton(Coordinate2D initialLocation, Shooter shooter, int id, String text){
+        super(initialLocation,text);
         setFill(Color.PURPLE);
         setFont(Font.font("Roboto", FontWeight.BOLD, 30));
         this.shooter = shooter;
+        this.id = id;
     }
 
     @Override
     public void onMouseButtonPressed(MouseButton mouseButton, Coordinate2D coordinate2D) {
-        shooter.setActiveScene(1);
+        shooter.setActiveScene(id);
     }
 
     @Override
