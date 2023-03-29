@@ -1,6 +1,8 @@
 package com.github.hanyaeger.tutorial.scenes;
 
+import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.DynamicScene;
+import com.github.hanyaeger.tutorial.entities.player.Player;
 
 public class GameScene extends DynamicScene {
     @Override
@@ -11,6 +13,7 @@ public class GameScene extends DynamicScene {
 
     @Override
     public void setupEntities() {
-
+        var player = new Player(new Coordinate2D(getWidth() / 2, getHeight() / 2));
+        addEntity(player);
     }
 }
