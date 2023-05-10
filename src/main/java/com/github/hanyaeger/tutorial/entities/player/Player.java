@@ -7,11 +7,9 @@ import com.github.hanyaeger.api.entities.SceneBorderTouchingWatcher;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
-import com.github.hanyaeger.api.userinput.MouseDraggedListener;
 import com.github.hanyaeger.api.userinput.MouseMovedListener;
 import com.github.hanyaeger.api.userinput.MouseMovedWhileDraggingListener;
 import com.github.hanyaeger.tutorial.Shooter;
-import com.github.hanyaeger.tutorial.entities.shooting.Bullet;
 import com.github.hanyaeger.tutorial.entities.text.BulletText;
 import com.github.hanyaeger.tutorial.entities.text.LivesText;
 import com.github.hanyaeger.tutorial.timers.reloadTimer;
@@ -25,6 +23,7 @@ import java.util.TimerTask;
 public class Player extends DynamicSpriteEntity implements KeyListener, SceneBorderTouchingWatcher, Collided, MouseMovedListener, MouseMovedWhileDraggingListener {
     int lives = 5;
     public int bullets = 15;
+    boolean colliding = false;
     LivesText livesText;
     BulletText bulletsText;
     Shooter shooter;
@@ -50,7 +49,12 @@ public class Player extends DynamicSpriteEntity implements KeyListener, SceneBor
             if (lives <= 0){
                 shooter.setActiveScene(2);
             }
-        };
+        }
+        if (collider.toString().contains("Wall")) {
+            setSpeed(0);
+            System.out.println(collider.getBoundingBox());
+            colliding = true;
+        }
     }
 
     @Override
@@ -77,41 +81,37 @@ public class Player extends DynamicSpriteEntity implements KeyListener, SceneBor
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
         int speed = 2;
-        if(pressedKeys.contains(KeyCode.LEFT)) {
-            if (pressedKeys.contains(KeyCode.UP)) {
-                setMotion(speed, 225d);
-            } else if (pressedKeys.contains(KeyCode.RIGHT)) {
-                setMotion(0, 0d);
-            } else if (pressedKeys.contains(KeyCode.DOWN)) {
-                setMotion(speed, 315d);
-            } else {
-                setMotion(speed, 270d);
-            }
-        } else
-        if(pressedKeys.contains(KeyCode.UP)){
-            if(pressedKeys.contains(KeyCode.RIGHT)){
-                setMotion(speed, 135d);
-            } else
-            if(pressedKeys.contains(KeyCode.DOWN)){
-                setMotion(0, 0d);
-            }  else {
-                setMotion(speed, 180d);
-            }
+            if (pressedKeys.contains(KeyCode.LEFT)) {
+                if (pressedKeys.contains(KeyCode.UP)) {
+                    setMotion(speed, 225d);
+                } else if (pressedKeys.contains(KeyCode.RIGHT)) {
+                    setMotion(0, 0d);
+                } else if (pressedKeys.contains(KeyCode.DOWN)) {
+                    setMotion(speed, 315d);
+                } else {
+                    setMotion(speed, 270d);
+                }
+            } else if (pressedKeys.contains(KeyCode.UP)) {
+                if (pressedKeys.contains(KeyCode.RIGHT)) {
+                    setMotion(speed, 135d);
+                } else if (pressedKeys.contains(KeyCode.DOWN)) {
+                    setMotion(0, 0d);
+                } else {
+                    setMotion(speed, 180d);
+                }
 
-        } else
-        if(pressedKeys.contains(KeyCode.DOWN)){
-            if (pressedKeys.contains(KeyCode.RIGHT)) {
-                setMotion(speed, 45d);
-        } else {
-                setMotion(speed, 0d);
+            } else if (pressedKeys.contains(KeyCode.DOWN)) {
+                if (pressedKeys.contains(KeyCode.RIGHT)) {
+                    setMotion(speed, 45d);
+                } else {
+                    setMotion(speed, 0d);
+                }
+            } else if (pressedKeys.contains(KeyCode.RIGHT)) {
+                setMotion(speed, 90d);
             }
-        } else
-        if(pressedKeys.contains(KeyCode.RIGHT)){
-            setMotion(speed, 90d);
-        }
-        if(pressedKeys.isEmpty()){
-            setSpeed(0);
-        }
+            if (pressedKeys.isEmpty()) {
+                setSpeed(0);
+            }
 
         if(pressedKeys.contains(KeyCode.R)){
             TimerTask task = new reloadTimer(this, bulletsText);
