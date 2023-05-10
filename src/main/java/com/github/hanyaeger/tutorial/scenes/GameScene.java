@@ -6,7 +6,8 @@ import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.api.userinput.MouseButtonPressedListener;
 import com.github.hanyaeger.api.userinput.MouseButtonReleasedListener;
 import com.github.hanyaeger.tutorial.Shooter;
-import com.github.hanyaeger.tutorial.entities.Enemy;
+import com.github.hanyaeger.tutorial.entities.enemies.Enemy;
+import com.github.hanyaeger.tutorial.entities.enemies.Runner;
 import com.github.hanyaeger.tutorial.entities.player.BulletSpawner;
 import com.github.hanyaeger.tutorial.entities.player.Player;
 import com.github.hanyaeger.tutorial.entities.text.BulletText;
@@ -37,6 +38,8 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, M
         addEntity(player);
         var enemy = new Enemy(new Coordinate2D(getWidth() / 10, getHeight() / 10), player);
         addEntity(enemy);
+        var runner = new Runner(new Coordinate2D(getWidth() / 8, getHeight() / 8), player);
+        addEntity(runner);
 //        var wall = new Wall(new Coordinate2D(getWidth() / 4, getHeight() / 4));
 //        addEntity(wall);
     }
