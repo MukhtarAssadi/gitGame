@@ -9,7 +9,6 @@ import com.github.hanyaeger.tutorial.Shooter;
 import com.github.hanyaeger.tutorial.entities.Enemy;
 import com.github.hanyaeger.tutorial.entities.player.BulletSpawner;
 import com.github.hanyaeger.tutorial.entities.player.Player;
-import com.github.hanyaeger.tutorial.entities.shooting.Bullet;
 import com.github.hanyaeger.tutorial.entities.text.BulletText;
 import com.github.hanyaeger.tutorial.entities.text.LivesText;
 import javafx.scene.input.MouseButton;
@@ -38,6 +37,8 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, M
         addEntity(player);
         var enemy = new Enemy(new Coordinate2D(getWidth() / 10, getHeight() / 10), player);
         addEntity(enemy);
+//        var wall = new Wall(new Coordinate2D(getWidth() / 4, getHeight() / 4));
+//        addEntity(wall);
     }
 
 
