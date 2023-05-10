@@ -7,7 +7,9 @@ import com.github.hanyaeger.api.userinput.MouseButtonPressedListener;
 import com.github.hanyaeger.api.userinput.MouseButtonReleasedListener;
 import com.github.hanyaeger.tutorial.Shooter;
 import com.github.hanyaeger.tutorial.entities.enemies.Enemy;
+import com.github.hanyaeger.tutorial.entities.enemies.EnemySpawner;
 import com.github.hanyaeger.tutorial.entities.enemies.Runner;
+import com.github.hanyaeger.tutorial.entities.enemies.Tank;
 import com.github.hanyaeger.tutorial.entities.player.BulletSpawner;
 import com.github.hanyaeger.tutorial.entities.player.Player;
 import com.github.hanyaeger.tutorial.entities.text.BulletText;
@@ -17,8 +19,10 @@ import javafx.scene.input.MouseButton;
 public class GameScene extends DynamicScene implements EntitySpawnerContainer, MouseButtonPressedListener, MouseButtonReleasedListener {
     Player player;
     BulletSpawner gun;
+    EnemySpawner enemySpawner;
     Shooter shooter;
     BulletText bulletsText;
+    Tank tank;
     public GameScene(Shooter shooter){
         this.shooter = shooter;
     }
@@ -40,8 +44,11 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, M
         addEntity(enemy);
         var runner = new Runner(new Coordinate2D(getWidth() / 8, getHeight() / 8), player);
         addEntity(runner);
+        tank = new Tank(new Coordinate2D(getWidth() / 8, getHeight() / 8), player);
+        addEntity(tank);
 //        var wall = new Wall(new Coordinate2D(getWidth() / 4, getHeight() / 4));
 //        addEntity(wall);
+        enemySpawner = new EnemySpawner(1, tank, player);
     }
 
 
@@ -49,11 +56,17 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, M
     public void onMouseButtonPressed(MouseButton mouseButton, Coordinate2D coordinate2D) {
         gun = new BulletSpawner(200, player, bulletsText);
         addEntitySpawner(gun);
+
     }
 
     @Override
     public void onMouseButtonReleased(MouseButton mouseButton, Coordinate2D coordinate2D) {
+        enemySpawner.remove();
         gun.remove();
+        if (tank.getHealth() <= 0){
+            addEntitySpawner(enemySpawner);
+            tank.remove();
+        }
     }
 
     @Override

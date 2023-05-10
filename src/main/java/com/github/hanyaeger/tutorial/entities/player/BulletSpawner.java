@@ -11,7 +11,6 @@ import javafx.scene.input.MouseButton;
 import java.util.Optional;
 
 public class BulletSpawner extends EntitySpawner {
-
     Player player;
     BulletText bulletText;
 

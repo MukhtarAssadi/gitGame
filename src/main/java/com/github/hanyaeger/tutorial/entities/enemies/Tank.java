@@ -4,11 +4,13 @@ import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.tutorial.entities.player.Player;
 
-public class Runner extends Enemy {
-    public Runner(Coordinate2D location, Player player) {
-        super(location, player, 30, "sprites/runner.png");
-        health = 3;
-        speed = 3;
+public class Tank extends Enemy{
+    Coordinate2D location;
+    public Tank(Coordinate2D location, Player player) {
+        super(location, player, 100, "sprites/enemy.png");
+        this.location = location;
+        health = 10;
+        speed = 1;
         setMotion(speed, angleTo(player.getAnchorLocation()));
     }
 

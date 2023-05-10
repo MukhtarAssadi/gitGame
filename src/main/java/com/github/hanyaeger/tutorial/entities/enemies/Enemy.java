@@ -33,14 +33,11 @@ public class Enemy extends DynamicSpriteEntity implements KeyListener, Collider,
         setMotion(speed, angleTo(player.getAnchorLocation()));
     }
 
-
-
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
         setRotate(180 + angleTo(player.getAnchorLocation()));
         setMotion(speed, angleTo(player.getAnchorLocation()));
     }
-
 
     @Override
     public void onCollision(Collider collider) {
@@ -50,5 +47,9 @@ public class Enemy extends DynamicSpriteEntity implements KeyListener, Collider,
         if (health <= 0){
             remove();
         }
+    }
+
+    public int getHealth(){
+        return health;
     }
 }
