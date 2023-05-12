@@ -13,7 +13,7 @@ public class Shooter extends YaegerGame {
     @Override
     public void setupGame() {
         setGameTitle("Shooter");
-        setSize(new Size(1200, 800));
+        setSize(new Size(1600, 900));
     }
     @Override
     public void setupScenes() {

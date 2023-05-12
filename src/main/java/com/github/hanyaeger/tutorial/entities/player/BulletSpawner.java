@@ -1,19 +1,14 @@
 package com.github.hanyaeger.tutorial.entities.player;
 
-import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.entities.EntitySpawner;
-import com.github.hanyaeger.api.userinput.MouseButtonReleasedListener;
 import com.github.hanyaeger.tutorial.entities.shooting.Bullet;
+import com.github.hanyaeger.tutorial.entities.sounds.Audio;
 import com.github.hanyaeger.tutorial.entities.text.BulletText;
-import javafx.scene.Node;
-import javafx.scene.input.MouseButton;
-
-import java.util.Optional;
 
 public class BulletSpawner extends EntitySpawner {
-
     Player player;
     BulletText bulletText;
+    Audio sound = new Audio("audio/schiet.mp3");
 
     public BulletSpawner(long intervalInMs, Player player, BulletText bulletText) {
         super(intervalInMs);
@@ -27,6 +22,7 @@ public class BulletSpawner extends EntitySpawner {
             spawn(new Bullet(player.getAnchorLocation(), 10, player.angle));
             player.bullets--;
             bulletText.setBulletsText(player.bullets);
+            sound.play();
         }
     }
 }
