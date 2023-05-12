@@ -9,10 +9,10 @@ import com.github.hanyaeger.tutorial.entities.player.Player;
 import com.github.hanyaeger.tutorial.entities.sounds.Audio;
 
 public class Enemy extends DynamicSpriteEntity implements Collider, Collided {
-    Player player;
-    int health;
-    int speed;
-    Audio deathSound;
+    public Player player;
+    public int health;
+    public int speed;
+    protected Audio deathSound;
 
     public Enemy(Coordinate2D location, Player player) {
        super("sprites/enemy.png", location, new Size(70, 70), 1, 1);

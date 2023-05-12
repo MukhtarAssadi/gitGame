@@ -6,8 +6,8 @@ import com.github.hanyaeger.tutorial.entities.sounds.Audio;
 import com.github.hanyaeger.tutorial.entities.text.BulletText;
 
 public class BulletSpawner extends EntitySpawner {
-    Player player;
-    BulletText bulletText;
+    public Player player;
+    public BulletText bulletText;
     Audio sound = new Audio("audio/schiet.mp3");
 
     public BulletSpawner(long intervalInMs, Player player, BulletText bulletText) {

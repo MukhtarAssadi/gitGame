@@ -14,7 +14,7 @@ import javafx.scene.text.FontWeight;
 
 public class SceneButton extends TextEntity implements MouseButtonPressedListener, MouseEnterListener, MouseExitListener {
     private Shooter shooter;
-    int id;
+    private int id;
     public SceneButton(Coordinate2D initialLocation, Shooter shooter, int id, String text){
         super(initialLocation,text);
         setFill(Color.PURPLE);
