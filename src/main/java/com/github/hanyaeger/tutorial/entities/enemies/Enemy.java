@@ -45,15 +45,11 @@ public class Enemy extends DynamicSpriteEntity implements Collider, Collided {
             remove();
             deathSound.play();
             player.kills++;
+            player.addKill();
         }
     }
 
-    public int getHealth(){
-        return health;
-    }
     public Coordinate2D getSceneCenter(double sceneWidth, double sceneHeigth) {
-        double xCenter = sceneWidth / 2;
-        double yCenter = sceneHeigth / 2;
         return new Coordinate2D(800, 450);
     }
 

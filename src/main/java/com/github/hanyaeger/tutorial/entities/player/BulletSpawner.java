@@ -18,7 +18,7 @@ public class BulletSpawner extends EntitySpawner {
 
     @Override
     public void spawnEntities() {
-        if (player.bullets > 0) {
+        if (player.bullets > 0 && !player.reloading) {
             spawn(new Bullet(player.getAnchorLocation(), 10, player.angle));
             player.bullets--;
             bulletText.setBulletsText(player.bullets);
