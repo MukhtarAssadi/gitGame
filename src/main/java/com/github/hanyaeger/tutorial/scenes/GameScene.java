@@ -8,10 +8,7 @@ import com.github.hanyaeger.api.userinput.KeyListener;
 import com.github.hanyaeger.api.userinput.MouseButtonPressedListener;
 import com.github.hanyaeger.api.userinput.MouseButtonReleasedListener;
 import com.github.hanyaeger.tutorial.Shooter;
-import com.github.hanyaeger.tutorial.entities.enemies.Enemy;
-import com.github.hanyaeger.tutorial.entities.enemies.EnemySpawner;
-import com.github.hanyaeger.tutorial.entities.enemies.Runner;
-import com.github.hanyaeger.tutorial.entities.enemies.Tank;
+import com.github.hanyaeger.tutorial.entities.enemies.*;
 import com.github.hanyaeger.tutorial.entities.enviroment.Wall;
 import com.github.hanyaeger.tutorial.entities.player.BulletSpawner;
 import com.github.hanyaeger.tutorial.entities.player.Player;
@@ -49,14 +46,8 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, M
         addEntity(bulletsText);
         StartText startText = new StartText(new Coordinate2D(getWidth() / 2, getHeight() / 8));
         addEntity(startText);
-        player = new Player(new Coordinate2D(getWidth() / 2, getHeight() / 2), livesText, bulletsText,  shooter, 3);
+        player = new Player(new Coordinate2D(getWidth() / 2, getHeight() / 2), livesText, bulletsText,  shooter, 50);
         addEntity(player);
-        var enemy = new Enemy(randomCoord(70), player);
-        addEntity(enemy);
-        var runner = new Runner(randomCoord(50), player);
-        addEntity(runner);
-        tank = new Tank(randomCoord(150), player);
-        addEntity(tank);
         Wall wall = new Wall(new Coordinate2D(getWidth() / 2, getHeight() / 2), player);
         addEntity(wall);
 
@@ -75,16 +66,23 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, M
 
     @Override
     public void onMouseButtonReleased(MouseButton mouseButton, Coordinate2D coordinate2D) {
-        gun.remove();
-        if (player.kills >= player.neededKills){
+        if (gun != null) {
+            gun.remove();
+        }
+        if (player.kills >= player.neededKills) {
             running = false;
             shooter.setActiveScene(2);
         }
+
     }
     @Override
     public void setupEntitySpawners() {
-        EnemySpawner spawner = new EnemySpawner(5000, 5, player, getWidth(), getHeight());
-        addEntitySpawner(spawner);
+        EnemySpawner enemySpawner = new EnemySpawner(2360, 5, player, getWidth(), getHeight());
+        addEntitySpawner(enemySpawner);
+        RunnerSpawner runnerSpawner = new RunnerSpawner(3133, 5, player, getWidth(), getHeight());
+        addEntitySpawner(runnerSpawner);
+        TankSpawner tankSpawner = new TankSpawner(9280, 5, player, getWidth(), getHeight());
+        addEntitySpawner(tankSpawner);
     }
 
     public Coordinate2D randomCoord(int size){

@@ -5,13 +5,10 @@ import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
-import com.github.hanyaeger.api.userinput.KeyListener;
 import com.github.hanyaeger.tutorial.entities.player.Player;
 import com.github.hanyaeger.tutorial.entities.sounds.Audio;
-import javafx.scene.input.KeyCode;
-import java.util.Set;
 
-public class Enemy extends DynamicSpriteEntity implements Collider, Collided, KeyListener {
+public class Enemy extends DynamicSpriteEntity implements Collider, Collided {
     Player player;
     int health;
     int speed;
@@ -41,6 +38,7 @@ public class Enemy extends DynamicSpriteEntity implements Collider, Collided, Ke
         }
         if (collider.toString().contains("Wall")) {
             player.removeLive();
+            System.out.println("hit!");
             remove();
         }
         if (health <= 0){
@@ -53,15 +51,10 @@ public class Enemy extends DynamicSpriteEntity implements Collider, Collided, Ke
     public int getHealth(){
         return health;
     }
-    public Coordinate2D getSceneCenter(double sceneWidth, double sceneHeigth){
+    public Coordinate2D getSceneCenter(double sceneWidth, double sceneHeigth) {
         double xCenter = sceneWidth / 2;
         double yCenter = sceneHeigth / 2;
         return new Coordinate2D(800, 450);
-    }
-    @Override
-    public void onPressedKeysChange(Set<KeyCode> set) {
-        setRotate(180 + angleTo(player.getAnchorLocation()));
-        setMotion(speed, angleTo(player.getAnchorLocation()));
     }
 
     public void setMotionNow(double sceneWidth, double sceneHeigth){

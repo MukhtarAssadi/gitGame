@@ -21,6 +21,8 @@ public class EnemySpawner extends EntitySpawner {
         this.player = player;
         this.sceneWidth = sceneWidth;
         this.sceneHeigth = sceneHeigth;
+        this.sceneWidth = sceneWidth = 1600;
+        this.sceneHeigth = sceneHeigth = 900;
     }
 
     public void spawnEntities() {
@@ -37,14 +39,13 @@ public class EnemySpawner extends EntitySpawner {
         do {
             x = new Random().nextInt((int) (sceneWidth));
             y = new Random().nextInt((int) (sceneHeigth));
-        } while ((x > 100 && x < sceneWidth - 100 && y > 100 && y < sceneHeigth - 100));
+        } while (((x > 50 && x < sceneWidth - 50) && (y > 50 && y < sceneHeigth - 50)));
         return new Coordinate2D(x, y);
     }
 
     @Override
     public void handle(long now) {
         super.handle(now);
-        System.out.println(now);
         if (enemy != null) {
             enemy.setMotionNow(sceneWidth, sceneHeigth);
         }
