@@ -15,6 +15,9 @@ public class Bullet extends DynamicSpriteEntity implements Collider, Collided{
 
     @Override
     public void onCollision(Collider collider) {
-        remove();
+        if (!collider.toString().contains("Wall")) {
+            remove();
+        }
     }
+
 }

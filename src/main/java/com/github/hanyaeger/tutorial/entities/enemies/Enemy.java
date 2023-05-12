@@ -7,49 +7,65 @@ import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import com.github.hanyaeger.tutorial.entities.player.Player;
+import com.github.hanyaeger.tutorial.entities.sounds.Audio;
 import javafx.scene.input.KeyCode;
-
 import java.util.Set;
 
-public class Enemy extends DynamicSpriteEntity implements KeyListener, Collider, Collided {
+public class Enemy extends DynamicSpriteEntity implements Collider, Collided, KeyListener {
     Player player;
     int health;
     int speed;
+    Audio deathSound;
+
     public Enemy(Coordinate2D location, Player player) {
-       super("sprites/enemy.png", location, new Size(50, 50), 1, 1);
+       super("sprites/enemy.png", location, new Size(70, 70), 1, 1);
         this.player = player;
         speed = 2;
-        health = 5;
-        setRotate(180 + angleTo(player.getAnchorLocation()));
-        setMotion(speed, angleTo(player.getAnchorLocation()));
+        health = 3;
+        deathSound = new Audio("audio/dood.mp3");
     }
 
-    public Enemy(Coordinate2D location, Player player, int size, String sprite) {
+    public Enemy(Coordinate2D location, Player player, int size, String sprite, String audio, int speed, int health) {
         super(sprite, location, new Size(size, size), 1, 1);
         this.player = player;
-        speed = 2;
-        health = 5;
-        setRotate(180 + angleTo(player.getAnchorLocation()));
-        setMotion(speed, angleTo(player.getAnchorLocation()));
+        this.speed = speed;
+        this.health = health;
+        deathSound = new Audio(audio);
     }
 
-    @Override
-    public void onPressedKeysChange(Set<KeyCode> pressedKeys) {
-        setRotate(180 + angleTo(player.getAnchorLocation()));
-        setMotion(speed, angleTo(player.getAnchorLocation()));
-    }
 
     @Override
     public void onCollision(Collider collider) {
         if (collider.toString().contains("Bullet")) {
             health--;
         }
+        if (collider.toString().contains("Wall")) {
+            player.removeLive();
+            remove();
+        }
         if (health <= 0){
             remove();
+            deathSound.play();
+            player.kills++;
         }
     }
 
     public int getHealth(){
         return health;
+    }
+    public Coordinate2D getSceneCenter(double sceneWidth, double sceneHeigth){
+        double xCenter = sceneWidth / 2;
+        double yCenter = sceneHeigth / 2;
+        return new Coordinate2D(800, 450);
+    }
+    @Override
+    public void onPressedKeysChange(Set<KeyCode> set) {
+        setRotate(180 + angleTo(player.getAnchorLocation()));
+        setMotion(speed, angleTo(player.getAnchorLocation()));
+    }
+
+    public void setMotionNow(double sceneWidth, double sceneHeigth){
+        setRotate(180 + angleTo(getSceneCenter(sceneWidth, sceneHeigth)));
+        setMotion(speed, angleTo(getSceneCenter(sceneWidth, sceneHeigth)));
     }
 }

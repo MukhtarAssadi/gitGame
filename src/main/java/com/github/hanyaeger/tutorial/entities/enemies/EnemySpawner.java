@@ -1,26 +1,53 @@
 package com.github.hanyaeger.tutorial.entities.enemies;
 
+import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.entities.EntitySpawner;
-import com.github.hanyaeger.api.entities.YaegerEntity;
 import com.github.hanyaeger.tutorial.entities.player.Player;
 
+import java.util.Random;
+
 public class EnemySpawner extends EntitySpawner {
-    Tank tank;
+    double sceneWidth;
+    double sceneHeigth;
+    int amount = 0;
+    int totalAmount;
+    Coordinate2D location;
     Player player;
-    public EnemySpawner(long intervalInMs, Tank tank, Player player) {
+    Enemy enemy;
+
+    public EnemySpawner(long intervalInMs, int totalAmount, Player player, double sceneWidth, double sceneHeigth) {
         super(intervalInMs);
-        this.tank = tank;
+        this.totalAmount = totalAmount;
         this.player = player;
+        this.sceneWidth = sceneWidth;
+        this.sceneHeigth = sceneHeigth;
     }
 
     public void spawnEntities() {
-        spawn(new Enemy(tank.getAnchorLocation(), player));
-        remove();
+        this.location = randomCoord(70);
+        Enemy enemy = new Enemy(location, player);
+        this.enemy = enemy;
+        spawn(this.enemy);
+        enemy.setMotionNow(sceneWidth, sceneHeigth);
+    }
+
+    public Coordinate2D randomCoord(int size){
+        int x;
+        int y;
+        do {
+            x = new Random().nextInt((int) (sceneWidth));
+            y = new Random().nextInt((int) (sceneHeigth));
+        } while ((x > 100 && x < sceneWidth - 100 && y > 100 && y < sceneHeigth - 100));
+        return new Coordinate2D(x, y);
     }
 
     @Override
-    protected void spawn(YaegerEntity entity) {
-        super.spawn(entity);
+    public void handle(long now) {
+        super.handle(now);
+        System.out.println(now);
+        if (enemy != null) {
+            enemy.setMotionNow(sceneWidth, sceneHeigth);
+        }
     }
 }
 

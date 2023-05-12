@@ -16,5 +16,6 @@ public class reloadTimer extends TimerTask {
     public void run() {
         player.bullets = 15;
         bulletText.setBulletsText(player.bullets);
+        bulletText.setBulletsText(15);
     }
 }
