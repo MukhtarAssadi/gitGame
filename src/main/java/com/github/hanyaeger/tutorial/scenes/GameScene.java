@@ -3,7 +3,6 @@ package com.github.hanyaeger.tutorial.scenes;
 import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.EntitySpawnerContainer;
-import com.github.hanyaeger.api.entities.EntitySpawner;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.api.userinput.MouseButtonPressedListener;
 import com.github.hanyaeger.api.userinput.MouseButtonReleasedListener;
@@ -37,15 +36,19 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, M
 
     @Override
     public void onMouseButtonPressed(MouseButton mouseButton, Coordinate2D coordinate2D) {
-        gun = new Gun(player);
-        addEntitySpawner(gun);
-        gun.spawn();
+        if (mouseButton == MouseButton.PRIMARY) {
+            gun = new Gun(player);
+            addEntitySpawner(gun);
+            gun.spawn();
+        }
     }
 
     @Override
     public void onMouseButtonReleased(MouseButton mouseButton, Coordinate2D coordinate2D) {
-        if (gun != null) {
-            gun.remove();
+        if (mouseButton == MouseButton.PRIMARY) {
+            if (gun != null) {
+                gun.remove();
+            }
         }
     }
 
