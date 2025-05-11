@@ -3,14 +3,17 @@ package com.github.hanyaeger.tutorial.entities.player;
 import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
+import com.github.hanyaeger.api.entities.Rotatable;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.userinput.KeyListener;
+import com.github.hanyaeger.api.userinput.MouseMovedListener;
 import javafx.scene.input.KeyCode;
 
 import java.util.Set;
 
-public class Player extends DynamicSpriteEntity implements KeyListener {
+public class Player extends DynamicSpriteEntity implements KeyListener, MouseMovedListener, Rotatable {
 
+    double facingAngle = 0d;
     public Player(Coordinate2D location) {
         super("sprites/player.png", location, new Size(70, 70), 1, 2);
 
@@ -49,5 +52,33 @@ public class Player extends DynamicSpriteEntity implements KeyListener {
         } else {
             setSpeed(0);
         }
+    }
+
+    @Override
+    public void onMouseMoved(Coordinate2D mousePosition) {
+        double mouseX = mousePosition.getX();
+        double mouseY = mousePosition.getY();
+        double playerX = this.getLocationInScene().getX();
+        double playerY = this.getLocationInScene().getY();
+
+        double angleRadians = Math.atan2(mouseX - playerX, mouseY - playerY);
+        double angleDegrees = Math.toDegrees(angleRadians);
+
+        facingAngle = (angleDegrees + 180) % 360;
+        setRotate(facingAngle);
+    }
+
+
+
+
+
+
+
+
+
+
+
+    public double getFacingAngle(){
+        return this.facingAngle;
     }
 }
