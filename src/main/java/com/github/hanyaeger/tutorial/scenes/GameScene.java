@@ -7,6 +7,7 @@ import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.api.userinput.MouseButtonPressedListener;
 import com.github.hanyaeger.api.userinput.MouseButtonReleasedListener;
 import com.github.hanyaeger.tutorial.Shooter;
+import com.github.hanyaeger.tutorial.entities.enemies.Enemy;
 import com.github.hanyaeger.tutorial.entities.player.Gun;
 import com.github.hanyaeger.tutorial.entities.player.Player;
 import javafx.scene.input.MouseButton;
@@ -31,6 +32,8 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, M
         player = new Player(new Coordinate2D(getWidth() / 2, getHeight() / 1.5));
         addEntity(player);
         player.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+        var enemy = new Enemy(new Coordinate2D(getWidth() / 7, getHeight() / 7));
+        addEntity(enemy);
     }
 
 
