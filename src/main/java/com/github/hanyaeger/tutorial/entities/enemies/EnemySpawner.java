@@ -7,13 +7,12 @@ import com.github.hanyaeger.tutorial.entities.player.Player;
 import java.util.Random;
 
 public class EnemySpawner extends EntitySpawner {
-    double sceneWidth;
-    double sceneHeigth;
-    int amount = 0;
+    protected double sceneWidth;
+    protected double sceneHeigth;
     int totalAmount;
-    Coordinate2D location;
-    Player player;
-    Enemy enemy;
+    public Coordinate2D location;
+    public Player player;
+    public Enemy enemy;
 
     public EnemySpawner(long intervalInMs, int totalAmount, Player player, double sceneWidth, double sceneHeigth) {
         super(intervalInMs);

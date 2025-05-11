@@ -9,10 +9,10 @@ import com.github.hanyaeger.tutorial.entities.player.Player;
 import com.github.hanyaeger.tutorial.entities.sounds.Audio;
 
 public class Enemy extends DynamicSpriteEntity implements Collider, Collided {
-    Player player;
-    int health;
-    int speed;
-    Audio deathSound;
+    public Player player;
+    public int health;
+    public int speed;
+    protected Audio deathSound;
 
     public Enemy(Coordinate2D location, Player player) {
        super("sprites/enemy.png", location, new Size(70, 70), 1, 1);
@@ -45,15 +45,11 @@ public class Enemy extends DynamicSpriteEntity implements Collider, Collided {
             remove();
             deathSound.play();
             player.kills++;
+            player.addKill();
         }
     }
 
-    public int getHealth(){
-        return health;
-    }
     public Coordinate2D getSceneCenter(double sceneWidth, double sceneHeigth) {
-        double xCenter = sceneWidth / 2;
-        double yCenter = sceneHeigth / 2;
         return new Coordinate2D(800, 450);
     }
 

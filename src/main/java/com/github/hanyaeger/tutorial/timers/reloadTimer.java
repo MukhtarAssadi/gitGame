@@ -17,5 +17,6 @@ public class reloadTimer extends TimerTask {
         player.bullets = 15;
         bulletText.setBulletsText(player.bullets);
         bulletText.setBulletsText(15);
+        player.reloading = false;
     }
 }
