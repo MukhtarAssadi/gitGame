@@ -20,10 +20,10 @@ public class TitleScene extends StaticScene {
 
     @Override
     public void setupEntities() {
-        var shooterButton = new SceneButton(
-                new Coordinate2D(getWidth() / 2, getHeight() / 2), shooter, 1, "Play game"
+        var startButton = new SceneButton(
+                new Coordinate2D(getWidth() / 2, getHeight() / 1.5), shooter, 1, "Play game"
         );
-        shooterButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
-        addEntity(shooterButton);
+        startButton.setAnchorPoint(AnchorPoint.CENTER_CENTER);
+        addEntity(startButton);
     }
 }
