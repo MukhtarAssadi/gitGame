@@ -17,8 +17,8 @@ public class SceneButton extends TextEntity implements MouseButtonPressedListene
     private int id;
     public SceneButton(Coordinate2D initialLocation, Shooter shooter, int id, String text){
         super(initialLocation,text);
-        setFill(Color.PURPLE);
-        setFont(Font.font("Roboto", FontWeight.BOLD, 30));
+        setFill(Color.RED);
+        setFont(Font.font("Roboto", FontWeight.BOLD, 60));
         this.shooter = shooter;
         this.id = id;
     }
@@ -30,13 +30,13 @@ public class SceneButton extends TextEntity implements MouseButtonPressedListene
 
     @Override
     public void onMouseEntered() {
-        setFill(Color.VIOLET);
+        setFill(Color.WHITE);
         setCursor(Cursor.HAND);
     }
 
     @Override
     public void onMouseExited() {
-        setFill(Color.PURPLE);
+        setFill(Color.RED);
         setCursor(Cursor.DEFAULT);
     }
 }
