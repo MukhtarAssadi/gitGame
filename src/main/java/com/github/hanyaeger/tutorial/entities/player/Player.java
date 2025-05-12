@@ -18,6 +18,7 @@ import java.util.Set;
 
 public class Player extends DynamicSpriteEntity implements KeyListener, MouseMovedListener, MouseMovedWhileDraggingListener, Rotatable, SceneBorderTouchingWatcher, Collider {
     public int health = 5;
+    public int speed = 3;
     public double facingAngle = 0d;
     public PlayerHealthText playerHealthText;
 
@@ -58,7 +59,7 @@ public class Player extends DynamicSpriteEntity implements KeyListener, MouseMov
                 angle = 90;
             }
 
-            setMotion(3, angle);
+            setMotion(speed, angle);
         } else {
             setSpeed(0);
         }

@@ -8,6 +8,7 @@ import com.github.hanyaeger.api.userinput.MouseButtonPressedListener;
 import com.github.hanyaeger.api.userinput.MouseButtonReleasedListener;
 import com.github.hanyaeger.tutorial.Shooter;
 import com.github.hanyaeger.tutorial.entities.items.HealthUp;
+import com.github.hanyaeger.tutorial.entities.items.SpeedUp;
 import com.github.hanyaeger.tutorial.entities.text.PlayerHealthText;
 import com.github.hanyaeger.tutorial.entities.enemies.Enemy;
 import com.github.hanyaeger.tutorial.entities.enemies.Runner;
@@ -42,6 +43,8 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, M
 
         var healthUp = new HealthUp(new Coordinate2D(getWidth() * 8 / 9.0, getHeight() * 8 / 9.0), player);
         addEntity(healthUp);
+        var speedUp = new SpeedUp(new Coordinate2D(getWidth() * 7 / 9.0, getHeight() * 7 / 9.0), player);
+        addEntity(speedUp);
 
 
         var enemy = new Enemy(new Coordinate2D(getWidth() / 5, getHeight() / 5), player);
