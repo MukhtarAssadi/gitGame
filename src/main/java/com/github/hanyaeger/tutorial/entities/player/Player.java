@@ -3,6 +3,7 @@ package com.github.hanyaeger.tutorial.entities.player;
 import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
+import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.Rotatable;
 import com.github.hanyaeger.api.entities.SceneBorderTouchingWatcher;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
@@ -10,15 +11,21 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import com.github.hanyaeger.api.userinput.MouseMovedListener;
 import com.github.hanyaeger.api.userinput.MouseMovedWhileDraggingListener;
+import com.github.hanyaeger.tutorial.entities.text.PlayerHealthText;
 import javafx.scene.input.KeyCode;
 
 import java.util.Set;
 
-public class Player extends DynamicSpriteEntity implements KeyListener, MouseMovedListener, MouseMovedWhileDraggingListener, Rotatable, SceneBorderTouchingWatcher {
+public class Player extends DynamicSpriteEntity implements KeyListener, MouseMovedListener, MouseMovedWhileDraggingListener, Rotatable, SceneBorderTouchingWatcher, Collider {
+    public int health = 5;
+    public double facingAngle = 0d;
+    public PlayerHealthText playerHealthText;
 
-    double facingAngle = 0d;
-    public Player(Coordinate2D location) {
+
+    public Player(Coordinate2D location, PlayerHealthText playerHealthText) {
         super("sprites/player.png", location, new Size(70, 70), 1, 2);
+
+        this.playerHealthText = playerHealthText;
 
         setAnchorPoint(AnchorPoint.CENTER_CENTER);
     }
@@ -70,16 +77,6 @@ public class Player extends DynamicSpriteEntity implements KeyListener, MouseMov
     }
 
 
-
-
-
-
-
-
-
-
-
-
     public double getFacingAngle(){
         return this.facingAngle;
     }
@@ -104,5 +101,10 @@ public class Player extends DynamicSpriteEntity implements KeyListener, MouseMov
             default:
                 break;
         }
+    }
+
+    public void changeHealth(int health){
+        this.health += health;
+        playerHealthText.setHealthText(this.health);
     }
 }

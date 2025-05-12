@@ -8,6 +8,7 @@ import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.Rotatable;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
+import com.github.hanyaeger.tutorial.entities.player.Bullet;
 import com.github.hanyaeger.tutorial.entities.player.Player;
 
 public class Enemy extends DynamicSpriteEntity implements Collided, Collider, TimerContainer, Rotatable {
@@ -32,8 +33,9 @@ public class Enemy extends DynamicSpriteEntity implements Collided, Collider, Ti
 
     @Override
     public void onCollision(Collider collider) {
-        if (collider.toString().contains("Bullet")) {
+        if (collider instanceof Bullet bullet) {
             health--;
+            System.out.println("hit! " + health);
         }
         if (health <= 0) {
             remove();

@@ -14,7 +14,7 @@ public class Gun extends EntitySpawner {
     public boolean isFiringOnce = false;
 
     public Gun(Player player) {
-        super(300);
+        super(200);
         this.player = player;
     }
 

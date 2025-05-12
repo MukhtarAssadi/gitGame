@@ -7,6 +7,8 @@ import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.api.userinput.MouseButtonPressedListener;
 import com.github.hanyaeger.api.userinput.MouseButtonReleasedListener;
 import com.github.hanyaeger.tutorial.Shooter;
+import com.github.hanyaeger.tutorial.entities.items.HealthUp;
+import com.github.hanyaeger.tutorial.entities.text.PlayerHealthText;
 import com.github.hanyaeger.tutorial.entities.enemies.Enemy;
 import com.github.hanyaeger.tutorial.entities.enemies.Runner;
 import com.github.hanyaeger.tutorial.entities.enemies.Tank;
@@ -31,14 +33,22 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, M
 
     @Override
     public void setupEntities() {
-        player = new Player(new Coordinate2D(getWidth() / 2, getHeight() / 1.5));
+        var playerHealthText = new PlayerHealthText(new Coordinate2D(getWidth() * 1 / 9.0, getHeight() * 1 / 9.0));
+        addEntity(playerHealthText);
+        player = new Player(new Coordinate2D(getWidth() / 2, getHeight() / 2), playerHealthText);
         addEntity(player);
         player.setAnchorPoint(AnchorPoint.CENTER_CENTER);
-        var enemy = new Enemy(new Coordinate2D(getWidth() / 7, getHeight() / 7), player);
+        playerHealthText.setHealthText(player.health);
+
+        var healthUp = new HealthUp(new Coordinate2D(getWidth() * 8 / 9.0, getHeight() * 8 / 9.0), player);
+        addEntity(healthUp);
+
+
+        var enemy = new Enemy(new Coordinate2D(getWidth() / 5, getHeight() / 5), player);
         addEntity(enemy);
         var runner = new Runner(new Coordinate2D(getWidth() / 9, getHeight() / 9), player);
         addEntity(runner);
-        var tank = new Tank(new Coordinate2D(getWidth() / 1.2, getHeight() / 12), player);
+        var tank = new Tank(new Coordinate2D(getWidth() / 1.75, getHeight() / 9), player);
         addEntity(tank);
     }
 
