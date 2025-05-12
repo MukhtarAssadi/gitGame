@@ -8,6 +8,8 @@ import com.github.hanyaeger.api.userinput.MouseButtonPressedListener;
 import com.github.hanyaeger.api.userinput.MouseButtonReleasedListener;
 import com.github.hanyaeger.tutorial.Shooter;
 import com.github.hanyaeger.tutorial.entities.enemies.Enemy;
+import com.github.hanyaeger.tutorial.entities.enemies.Runner;
+import com.github.hanyaeger.tutorial.entities.enemies.Tank;
 import com.github.hanyaeger.tutorial.entities.player.Gun;
 import com.github.hanyaeger.tutorial.entities.player.Player;
 import javafx.scene.input.MouseButton;
@@ -32,8 +34,12 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, M
         player = new Player(new Coordinate2D(getWidth() / 2, getHeight() / 1.5));
         addEntity(player);
         player.setAnchorPoint(AnchorPoint.CENTER_CENTER);
-        var enemy = new Enemy(new Coordinate2D(getWidth() / 7, getHeight() / 7));
+        var enemy = new Enemy(new Coordinate2D(getWidth() / 7, getHeight() / 7), player);
         addEntity(enemy);
+        var runner = new Runner(new Coordinate2D(getWidth() / 9, getHeight() / 9), player);
+        addEntity(runner);
+        var tank = new Tank(new Coordinate2D(getWidth() / 1.2, getHeight() / 12), player);
+        addEntity(tank);
     }
 
 

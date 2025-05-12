@@ -11,20 +11,29 @@ import java.util.Optional;
 
 public class Gun extends EntitySpawner {
     private Player player;
+    public boolean isFiringOnce = false;
 
     public Gun(Player player) {
-        super(100);
+        super(300);
+        this.player = player;
+    }
+
+    public Gun(Player player, long shootingInterval) {
+        super(shootingInterval);
         this.player = player;
     }
 
     @Override
     protected void spawnEntities() {
-        spawn();
+        spawn(new Bullet(player.getAnchorLocation(), player.getFacingAngle()));
     }
 
     public void spawn() {
         spawn(new Bullet(player.getAnchorLocation(), player.getFacingAngle()));
+
+
     }
+
 
 
 }
