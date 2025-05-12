@@ -4,11 +4,14 @@ import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.EntitySpawnerContainer;
 import com.github.hanyaeger.api.scenes.DynamicScene;
+import com.github.hanyaeger.api.scenes.TileMapContainer;
 import com.github.hanyaeger.api.userinput.MouseButtonPressedListener;
 import com.github.hanyaeger.api.userinput.MouseButtonReleasedListener;
 import com.github.hanyaeger.tutorial.Shooter;
 import com.github.hanyaeger.tutorial.entities.items.HealthUp;
 import com.github.hanyaeger.tutorial.entities.items.SpeedUp;
+import com.github.hanyaeger.tutorial.entities.terrain.Wall;
+import com.github.hanyaeger.tutorial.entities.terrain.WallTileMap;
 import com.github.hanyaeger.tutorial.entities.text.PlayerHealthText;
 import com.github.hanyaeger.tutorial.entities.enemies.Enemy;
 import com.github.hanyaeger.tutorial.entities.enemies.Runner;
@@ -17,7 +20,7 @@ import com.github.hanyaeger.tutorial.entities.player.Gun;
 import com.github.hanyaeger.tutorial.entities.player.Player;
 import javafx.scene.input.MouseButton;
 
-public class GameScene extends DynamicScene implements EntitySpawnerContainer, MouseButtonPressedListener, MouseButtonReleasedListener {
+public class GameScene extends DynamicScene implements EntitySpawnerContainer, MouseButtonPressedListener, MouseButtonReleasedListener, TileMapContainer {
     Shooter shooter;
     Player player;
     Gun gun;
@@ -53,6 +56,11 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, M
         addEntity(runner);
         var tank = new Tank(new Coordinate2D(getWidth() / 1.75, getHeight() / 9), player);
         addEntity(tank);
+    }
+
+    @Override
+    public void setupTileMaps() {
+        addTileMap(new WallTileMap());
     }
 
 

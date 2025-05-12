@@ -3,6 +3,7 @@ package com.github.hanyaeger.tutorial.entities.player;
 import com.github.hanyaeger.api.AnchorPoint;
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
+import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.Rotatable;
 import com.github.hanyaeger.api.entities.SceneBorderTouchingWatcher;
@@ -11,16 +12,19 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import com.github.hanyaeger.api.userinput.MouseMovedListener;
 import com.github.hanyaeger.api.userinput.MouseMovedWhileDraggingListener;
+import com.github.hanyaeger.tutorial.entities.terrain.Wall;
 import com.github.hanyaeger.tutorial.entities.text.PlayerHealthText;
 import javafx.scene.input.KeyCode;
 
 import java.util.Set;
 
-public class Player extends DynamicSpriteEntity implements KeyListener, MouseMovedListener, MouseMovedWhileDraggingListener, Rotatable, SceneBorderTouchingWatcher, Collider {
+public class Player extends DynamicSpriteEntity implements KeyListener, MouseMovedListener, MouseMovedWhileDraggingListener, Rotatable, SceneBorderTouchingWatcher, Collider, Collided {
     public int health = 5;
     public int speed = 3;
     public double facingAngle = 0d;
     public PlayerHealthText playerHealthText;
+    
+    private Coordinate2D previousPosition;
 
 
     public Player(Coordinate2D location, PlayerHealthText playerHealthText) {
@@ -33,10 +37,13 @@ public class Player extends DynamicSpriteEntity implements KeyListener, MouseMov
 
     @Override
     public void onPressedKeysChange(Set<KeyCode> pressedKeys){
+        previousPosition = getAnchorLocation();
+
         boolean left = pressedKeys.contains(KeyCode.LEFT);
         boolean right = pressedKeys.contains(KeyCode.RIGHT);
         boolean up = pressedKeys.contains(KeyCode.UP);
         boolean down = pressedKeys.contains(KeyCode.DOWN);
+
 
         if (left || right || up || down) {
             double angle = -1;
@@ -108,4 +115,14 @@ public class Player extends DynamicSpriteEntity implements KeyListener, MouseMov
         this.health += health;
         playerHealthText.setHealthText(this.health);
     }
+
+    @Override
+    public void onCollision(Collider collider) {
+        if (collider instanceof Wall) {
+            setAnchorLocation(previousPosition);
+            setSpeed(0);
+        }
+    }
+
+
 }
