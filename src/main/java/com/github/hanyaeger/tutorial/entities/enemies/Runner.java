@@ -5,8 +5,8 @@ import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.tutorial.entities.player.Player;
 
 public class Runner extends Enemy {
-    public Runner(Coordinate2D initialLocation, Player player){
-        super("sprites/runner.png", initialLocation, new Size(35, 35), 1, 5, player);
+    public Runner(Coordinate2D initialLocation, Player player, EnemySpawnHandler wave){
+        super("sprites/runner.png", initialLocation, new Size(35, 35), 1, 4, player, wave);
     }
 }
 

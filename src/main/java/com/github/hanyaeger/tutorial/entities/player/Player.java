@@ -23,7 +23,7 @@ public class Player extends DynamicSpriteEntity implements KeyListener, MouseMov
     public int speed = 3;
     public double facingAngle = 0d;
     public PlayerHealthText playerHealthText;
-    
+
     private Coordinate2D previousPosition;
 
 
