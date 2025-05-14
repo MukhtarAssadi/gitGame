@@ -20,6 +20,7 @@ public class Enemy extends DynamicSpriteEntity implements Collided, Collider, Ti
 
     public Enemy(Coordinate2D initialLocation, Player player, EnemySpawnHandler wave) {
         super("sprites/enemy.png", initialLocation, new Size(70, 70));
+
         this.health = 3;
         this.speed = 3;
         this.player = player;
@@ -28,6 +29,7 @@ public class Enemy extends DynamicSpriteEntity implements Collided, Collider, Ti
 
     public Enemy(String resource, Coordinate2D initialLocation, Size size, int health, int speed, Player player, EnemySpawnHandler wave){
         super(resource, initialLocation, size);
+
         this.health = health;
         this.speed = speed;
         this.player = player;
@@ -48,9 +50,8 @@ public class Enemy extends DynamicSpriteEntity implements Collided, Collider, Ti
 
     @Override
     public void onCollision(Collider collider) {
-        if (collider instanceof Bullet bullet) {
+        if (collider instanceof Bullet) {
             health--;
-            System.out.println("hit! " + health);
         }
         if (health <= 0) {
             death();

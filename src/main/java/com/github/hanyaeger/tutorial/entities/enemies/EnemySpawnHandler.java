@@ -19,16 +19,20 @@ public class EnemySpawnHandler extends EntitySpawner {
 
     private int wave = 1;
     private List<Enemy> enemiesToSpawn = new ArrayList<>();
+    private int enemiesLeft = 0;
+
     private final double width;
     private final double height;
-    private int enemiesLeft = 0;
+
 
     public EnemySpawnHandler(double width, double height, Player player, WaveText waveText) {
         super(1000);
+
         this.width = width;
         this.height = height;
         this.player = player;
         this.waveText = waveText;
+
         spawnWave();
     }
 
@@ -90,12 +94,19 @@ public class EnemySpawnHandler extends EntitySpawner {
         if (random.nextDouble() <= 0.25) {
             PowerUp powerUp;
 
-            if (random.nextBoolean()) {
-                powerUp = new HealthUp(spawnLocation, player);
+            if(player.speed <= 7) {
+                if (random.nextBoolean()) {
+                    powerUp = new HealthUp(spawnLocation, player);
+                } else {
+                    powerUp = new SpeedUp(spawnLocation, player);
+                }
+                spawn(powerUp);
             } else {
-                powerUp = new SpeedUp(spawnLocation, player);
+                if (random.nextBoolean()) {
+                    powerUp = new HealthUp(spawnLocation, player);
+                    spawn(powerUp);
+                }
             }
-            spawn(powerUp);
         }
     }
 

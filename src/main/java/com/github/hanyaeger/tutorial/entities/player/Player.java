@@ -12,6 +12,7 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import com.github.hanyaeger.api.userinput.MouseMovedListener;
 import com.github.hanyaeger.api.userinput.MouseMovedWhileDraggingListener;
+import com.github.hanyaeger.tutorial.Shooter;
 import com.github.hanyaeger.tutorial.entities.terrain.Wall;
 import com.github.hanyaeger.tutorial.entities.text.PlayerHealthText;
 import javafx.scene.input.KeyCode;
@@ -22,16 +23,17 @@ public class Player extends DynamicSpriteEntity implements KeyListener, MouseMov
     public int health = 5;
     public int speed = 3;
     public double facingAngle = 0d;
-    public PlayerHealthText playerHealthText;
 
+    private PlayerHealthText playerHealthText;
+    private Shooter shooter;
     private Coordinate2D previousPosition;
 
 
-    public Player(Coordinate2D location, PlayerHealthText playerHealthText) {
+    public Player(Coordinate2D location, PlayerHealthText playerHealthText, Shooter shooter) {
         super("sprites/player.png", location, new Size(70, 70), 1, 2);
 
         this.playerHealthText = playerHealthText;
-
+        this.shooter = shooter;
         setAnchorPoint(AnchorPoint.CENTER_CENTER);
     }
 
@@ -114,6 +116,9 @@ public class Player extends DynamicSpriteEntity implements KeyListener, MouseMov
     public void changeHealth(int health){
         this.health += health;
         playerHealthText.setHealthText(this.health);
+        if (this.health <= 0){
+            shooter.setActiveScene(2);
+        }
     }
 
     @Override
