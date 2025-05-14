@@ -12,23 +12,38 @@ import com.github.hanyaeger.tutorial.entities.player.Bullet;
 import com.github.hanyaeger.tutorial.entities.player.Player;
 
 public class Enemy extends DynamicSpriteEntity implements Collided, Collider, TimerContainer, Rotatable {
-    private Player player;
+    protected Player player;
+    protected EnemySpawnHandler wave;
 
-    public int health;
-    public int speed;
+    protected int health;
+    protected int speed;
 
-    public Enemy(Coordinate2D initialLocation, Player player) {
+    public Enemy(Coordinate2D initialLocation, Player player, EnemySpawnHandler wave) {
         super("sprites/enemy.png", initialLocation, new Size(70, 70));
         this.health = 3;
-        this.speed = 4;
+        this.speed = 3;
         this.player = player;
+        this.wave = wave;
     }
 
-    public Enemy(String resource, Coordinate2D initialLocation, Size size, int health, int speed, Player player){
+    public Enemy(String resource, Coordinate2D initialLocation, Size size, int health, int speed, Player player, EnemySpawnHandler wave){
         super(resource, initialLocation, size);
         this.health = health;
         this.speed = speed;
         this.player = player;
+        this.wave = wave;
+    }
+
+    public void death(){
+        wave.notifyEnemyDeath();
+        remove();
+    }
+
+    public void damage(){
+        player.changeHealth(-1);
+        //effect
+        wave.notifyEnemyDeath();
+        remove();
     }
 
     @Override
@@ -38,7 +53,10 @@ public class Enemy extends DynamicSpriteEntity implements Collided, Collider, Ti
             System.out.println("hit! " + health);
         }
         if (health <= 0) {
-            remove();
+            death();
+        }
+        if (collider instanceof Player player){
+            damage();
         }
     }
 

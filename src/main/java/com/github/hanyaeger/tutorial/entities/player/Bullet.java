@@ -19,6 +19,7 @@ public class Bullet extends DynamicSpriteEntity implements Rotatable, Collider, 
 
     @Override
     public void onCollision(Collider collider) {
+        System.out.println(collider.toString());
         if (collider instanceof Player player) {
         } else {
             remove();

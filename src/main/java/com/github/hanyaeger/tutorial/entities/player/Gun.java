@@ -30,8 +30,6 @@ public class Gun extends EntitySpawner {
 
     public void spawn() {
         spawn(new Bullet(player.getAnchorLocation(), player.getFacingAngle()));
-
-
     }
 
 
