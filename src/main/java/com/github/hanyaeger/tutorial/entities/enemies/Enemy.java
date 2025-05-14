@@ -41,7 +41,7 @@ public class Enemy extends DynamicSpriteEntity implements Collided, Collider, Ti
 
     public void damage(){
         player.changeHealth(-1);
-        //effect
+        wave.damageIndication(getAnchorLocation());
         wave.notifyEnemyDeath();
         remove();
     }

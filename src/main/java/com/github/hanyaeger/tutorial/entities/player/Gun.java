@@ -18,11 +18,6 @@ public class Gun extends EntitySpawner {
         this.player = player;
     }
 
-    public Gun(Player player, long shootingInterval) {
-        super(shootingInterval);
-        this.player = player;
-    }
-
     @Override
     protected void spawnEntities() {
         spawn(new Bullet(player.getAnchorLocation(), player.getFacingAngle()));
