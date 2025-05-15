@@ -4,7 +4,7 @@ import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.TimerContainer;
 import com.github.hanyaeger.tutorial.entities.player.Player;
 
-public class SpeedUp extends PowerUp implements TimerContainer {
+public class SpeedUp extends PowerUp {
 
     public SpeedUp(Coordinate2D initialLocation, Player player) {
         super("sprites/speed.png", initialLocation, player);
@@ -15,8 +15,4 @@ public class SpeedUp extends PowerUp implements TimerContainer {
         player.speed += 1;
     }
 
-    @Override
-    public void setupTimers() {
-
-    }
 }

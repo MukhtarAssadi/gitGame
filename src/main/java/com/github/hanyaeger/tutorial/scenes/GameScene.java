@@ -42,18 +42,10 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, M
         waveText = new WaveText(new Coordinate2D(getWidth() * 8 / 9.0, getHeight() * 1 / 9.0));
         addEntity(waveText);
 
-
-
-        player = new Player(new Coordinate2D(getWidth() / 2, getHeight() / 2), playerHealthText);
+        player = new Player(new Coordinate2D(getWidth() / 2, getHeight() / 2), playerHealthText, shooter);
         addEntity(player);
         player.setAnchorPoint(AnchorPoint.CENTER_CENTER);
         playerHealthText.setHealthText(player.health);
-
-        var healthUp = new HealthUp(new Coordinate2D(getWidth() * 8 / 9.0, getHeight() * 8 / 9.0), player);
-        addEntity(healthUp);
-        var speedUp = new SpeedUp(new Coordinate2D(getWidth() * 7 / 9.0, getHeight() * 7 / 9.0), player);
-        addEntity(speedUp);
-
     }
 
     @Override

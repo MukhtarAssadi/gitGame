@@ -5,6 +5,7 @@ import com.github.hanyaeger.api.entities.EntitySpawner;
 import com.github.hanyaeger.tutorial.entities.items.HealthUp;
 import com.github.hanyaeger.tutorial.entities.items.PowerUp;
 import com.github.hanyaeger.tutorial.entities.items.SpeedUp;
+import com.github.hanyaeger.tutorial.entities.player.DamageIndicator;
 import com.github.hanyaeger.tutorial.entities.player.Player;
 import com.github.hanyaeger.tutorial.entities.text.WaveText;
 
@@ -18,16 +19,20 @@ public class EnemySpawnHandler extends EntitySpawner {
 
     private int wave = 1;
     private List<Enemy> enemiesToSpawn = new ArrayList<>();
+    private int enemiesLeft = 0;
+
     private final double width;
     private final double height;
-    private int enemiesLeft = 0;
+
 
     public EnemySpawnHandler(double width, double height, Player player, WaveText waveText) {
         super(1000);
+
         this.width = width;
         this.height = height;
         this.player = player;
         this.waveText = waveText;
+
         spawnWave();
     }
 
@@ -84,17 +89,29 @@ public class EnemySpawnHandler extends EntitySpawner {
         waveText.setWaveText(wave);
     }
 
-    public void itemSpawn(Coordinate2D spawnLocation){
+    public void itemSpawn(Coordinate2D spawnLocation) {
         Random random = new Random();
         if (random.nextDouble() <= 0.25) {
             PowerUp powerUp;
 
-            if (random.nextBoolean()) {
-                powerUp = new HealthUp(spawnLocation, player);
+            if(player.speed <= 7) {
+                if (random.nextBoolean()) {
+                    powerUp = new HealthUp(spawnLocation, player);
+                } else {
+                    powerUp = new SpeedUp(spawnLocation, player);
+                }
+                spawn(powerUp);
             } else {
-                powerUp = new SpeedUp(spawnLocation, player);
+                if (random.nextBoolean()) {
+                    powerUp = new HealthUp(spawnLocation, player);
+                    spawn(powerUp);
+                }
             }
-            spawn(powerUp);
         }
+    }
+
+    public void damageIndication(Coordinate2D location){
+        DamageIndicator damageIndicator = new DamageIndicator(location);
+        spawn(damageIndicator);
     }
 }

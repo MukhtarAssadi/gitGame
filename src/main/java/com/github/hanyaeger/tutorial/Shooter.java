@@ -2,6 +2,7 @@ package com.github.hanyaeger.tutorial;
 
 import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.YaegerGame;
+import com.github.hanyaeger.tutorial.scenes.DeathScene;
 import com.github.hanyaeger.tutorial.scenes.GameScene;
 import com.github.hanyaeger.tutorial.scenes.TitleScene;
 
@@ -18,5 +19,6 @@ public class Shooter extends YaegerGame {
     public void setupScenes() {
         addScene(0, new TitleScene(this));
         addScene(1, new GameScene(this));
+        addScene(2, new DeathScene(this));
     }
 }
