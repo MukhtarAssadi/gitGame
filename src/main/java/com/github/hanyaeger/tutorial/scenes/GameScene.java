@@ -8,9 +8,7 @@ import com.github.hanyaeger.api.scenes.TileMapContainer;
 import com.github.hanyaeger.api.userinput.MouseButtonPressedListener;
 import com.github.hanyaeger.api.userinput.MouseButtonReleasedListener;
 import com.github.hanyaeger.tutorial.Shooter;
-import com.github.hanyaeger.tutorial.entities.enemies.EnemySpawnHandler;
-import com.github.hanyaeger.tutorial.entities.items.HealthUp;
-import com.github.hanyaeger.tutorial.entities.items.SpeedUp;
+import com.github.hanyaeger.tutorial.entities.enemies.WaveSpawner;
 import com.github.hanyaeger.tutorial.entities.terrain.WallTileMap;
 import com.github.hanyaeger.tutorial.entities.text.PlayerHealthText;
 import com.github.hanyaeger.tutorial.entities.player.Gun;
@@ -22,7 +20,7 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, M
     Shooter shooter;
     Player player;
     Gun gun;
-    EnemySpawnHandler wave;
+    WaveSpawner wave;
     WaveText waveText;
 
     public GameScene(Shooter shooter) {
@@ -50,7 +48,7 @@ public class GameScene extends DynamicScene implements EntitySpawnerContainer, M
 
     @Override
     public void setupEntitySpawners() {
-        wave = new EnemySpawnHandler(getWidth(), getHeight(), player, waveText);
+        wave = new WaveSpawner(getWidth(), getHeight(), player, waveText);
         addEntitySpawner(wave);
         wave.setWaveText();
     }
