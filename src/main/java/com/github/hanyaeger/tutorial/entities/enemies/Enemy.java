@@ -8,6 +8,7 @@ import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.Rotatable;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
+import com.github.hanyaeger.api.media.SoundClip;
 import com.github.hanyaeger.tutorial.entities.player.Bullet;
 import com.github.hanyaeger.tutorial.entities.player.Player;
 
@@ -38,6 +39,7 @@ public class Enemy extends DynamicSpriteEntity implements Collided, Collider, Ti
 
     public void death(){
         wave.notifyEnemyDeath();
+        new SoundClip("audio/dood.mp3").play();
         remove();
     }
 

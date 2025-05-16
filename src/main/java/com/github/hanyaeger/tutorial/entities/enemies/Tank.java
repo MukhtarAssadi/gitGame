@@ -2,6 +2,7 @@ package com.github.hanyaeger.tutorial.entities.enemies;
 
 import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.Size;
+import com.github.hanyaeger.api.media.SoundClip;
 import com.github.hanyaeger.tutorial.entities.player.Player;
 
 public class Tank extends Enemy {
@@ -13,6 +14,7 @@ public class Tank extends Enemy {
     public void death(){
         wave.notifyEnemyDeath();
         wave.itemSpawn(getAnchorLocation());
+        new SoundClip("audio/dood.mp3").play();
         remove();
     }
 }

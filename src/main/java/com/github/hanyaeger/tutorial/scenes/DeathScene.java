@@ -14,7 +14,6 @@ public class DeathScene extends StaticScene {
     }
     @Override
     public void setupScene() {
-        setBackgroundAudio("audio/ocean.mp3");
         setBackgroundImage("sprites/background.png");
     }
 

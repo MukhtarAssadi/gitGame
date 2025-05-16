@@ -5,6 +5,7 @@ import com.github.hanyaeger.api.Size;
 import com.github.hanyaeger.api.entities.Collided;
 import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
+import com.github.hanyaeger.api.media.SoundClip;
 import com.github.hanyaeger.tutorial.entities.player.Player;
 
 public abstract class PowerUp extends DynamicSpriteEntity implements Collided {
@@ -21,6 +22,7 @@ public abstract class PowerUp extends DynamicSpriteEntity implements Collided {
     public void onCollision(Collider collider) {
         if (collider instanceof Player player) {
             usePowerUp(player);
+            new SoundClip("audio/pop.mp3").play();
             remove();
         }
     }
