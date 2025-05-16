@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class EnemySpawnHandler extends EntitySpawner {
+public class WaveSpawner extends EntitySpawner {
     private Player player;
     private WaveText waveText;
 
@@ -25,7 +25,7 @@ public class EnemySpawnHandler extends EntitySpawner {
     private final double height;
 
 
-    public EnemySpawnHandler(double width, double height, Player player, WaveText waveText) {
+    public WaveSpawner(double width, double height, Player player, WaveText waveText) {
         super(1000);
 
         this.width = width;
@@ -66,7 +66,7 @@ public class EnemySpawnHandler extends EntitySpawner {
         }
     }
 
-    private Coordinate2D randomSpawnLocation() {
+    public Coordinate2D randomSpawnLocation() {
         List<Coordinate2D> spawnPoints = List.of(
                 new Coordinate2D(width * 1 / 9.0, height * 1 / 9.0),        // top-left
                 new Coordinate2D(width * 4.5 / 9.0, height * 1 / 9.0),      // top-middle

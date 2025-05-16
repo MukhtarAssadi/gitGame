@@ -19,6 +19,4 @@ public class Gun extends EntitySpawner {
         spawn(new Bullet(player.getAnchorLocation(), player.getFacingAngle()));
     }
 
-
-
 }

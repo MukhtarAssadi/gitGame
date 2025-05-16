@@ -13,12 +13,12 @@ import com.github.hanyaeger.tutorial.entities.player.Player;
 
 public class Enemy extends DynamicSpriteEntity implements Collided, Collider, TimerContainer, Rotatable {
     protected Player player;
-    protected EnemySpawnHandler wave;
+    protected WaveSpawner wave;
 
     protected int health;
     protected int speed;
 
-    public Enemy(Coordinate2D initialLocation, Player player, EnemySpawnHandler wave) {
+    public Enemy(Coordinate2D initialLocation, Player player, WaveSpawner wave) {
         super("sprites/enemy.png", initialLocation, new Size(70, 70));
 
         this.health = 3;
@@ -27,7 +27,7 @@ public class Enemy extends DynamicSpriteEntity implements Collided, Collider, Ti
         this.wave = wave;
     }
 
-    public Enemy(String resource, Coordinate2D initialLocation, Size size, int health, int speed, Player player, EnemySpawnHandler wave){
+    public Enemy(String resource, Coordinate2D initialLocation, Size size, int health, int speed, Player player, WaveSpawner wave){
         super(resource, initialLocation, size);
 
         this.health = health;

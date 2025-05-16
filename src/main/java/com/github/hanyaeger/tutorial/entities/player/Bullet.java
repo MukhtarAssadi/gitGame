@@ -10,7 +10,7 @@ import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 public class Bullet extends DynamicSpriteEntity implements Rotatable, Collider, Collided {
     private int speed = 10;
 
-    Bullet(Coordinate2D initialLocation, double shootingAngle) {
+    public Bullet(Coordinate2D initialLocation, double shootingAngle) {
         super("sprites/bullet.png", initialLocation, new Size(5, 10));
         setMotion(speed, shootingAngle + 180);
         setRotate(shootingAngle + 180);

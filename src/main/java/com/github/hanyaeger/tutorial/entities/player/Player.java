@@ -113,8 +113,8 @@ public class Player extends DynamicSpriteEntity implements KeyListener, MouseMov
         }
     }
 
-    public void changeHealth(int health){
-        this.health += health;
+    public void changeHealth(int healthChange){
+        this.health += healthChange;
         playerHealthText.setHealthText(this.health);
         if (this.health <= 0){
             shooter.setActiveScene(2);
