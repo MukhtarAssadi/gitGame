@@ -68,14 +68,14 @@ public class WaveSpawner extends EntitySpawner {
 
     public Coordinate2D randomSpawnLocation() {
         List<Coordinate2D> spawnPoints = List.of(
-                new Coordinate2D(width * 1 / 9.0, height * 1 / 9.0),        // top-left
-                new Coordinate2D(width * 4.5 / 9.0, height * 1 / 9.0),      // top-middle
-                new Coordinate2D(width * 8 / 9.0, height * 1 / 9.0),        // top-right
-                new Coordinate2D(width * 1 / 9.0, height * 4.5 / 9.0),      // middle-left
-                new Coordinate2D(width * 8 / 9.0, height * 4.5 / 9.0),      // middle-right
-                new Coordinate2D(width * 1 / 9.0, height * 8 / 9.0),        // bottom-left
-                new Coordinate2D(width * 4.5 / 9.0, height * 8 / 9.0),      // bottom-middle
-                new Coordinate2D(width * 8 / 9.0, height * 8 / 9.0)         // bottom-right
+                new Coordinate2D(width * 1 / 9.0, height * 1 / 9.0),
+                new Coordinate2D(width * 4.5 / 9.0, height * 1 / 9.0),
+                new Coordinate2D(width * 8 / 9.0, height * 1 / 9.0),
+                new Coordinate2D(width * 1 / 9.0, height * 4.5 / 9.0),
+                new Coordinate2D(width * 8 / 9.0, height * 4.5 / 9.0),
+                new Coordinate2D(width * 1 / 9.0, height * 8 / 9.0),
+                new Coordinate2D(width * 4.5 / 9.0, height * 8 / 9.0),
+                new Coordinate2D(width * 8 / 9.0, height * 8 / 9.0)
         );
 
         return spawnPoints.get((int)(Math.random() * spawnPoints.size()));
